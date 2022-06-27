@@ -19,15 +19,6 @@
         document.getElementById(`${payload[index].name}-counter`).style.display = "inline-block"
     }
 
-    const sendData = () => {
-        let d = payload.filter((obj) => {
-            console.log(obj)
-            return obj.count > 0;
-        })
-
-        tg.sendData(JSON.stringify(d))
-    }
-
     const changeCount = (index, x) => {
         payload[index].count += x;
 
@@ -42,6 +33,20 @@
     let tg = window.Telegram.WebApp;
     let username = (tg.initDataUnsafe.user) ? tg.initDataUnsafe.user.first_name : "guest";
 
+    const sendData = () => {
+        let d = payload.filter((obj) => {
+            console.log(obj)
+            return obj.count > 0;
+        })
+
+        tg.sendData(JSON.stringify(d))
+    }
+
+    tg.MainButton.text = "Hello";
+
+    tg.onEvent('mainButtonClicked', () => {
+        sendData()
+    })
 </script>
 
 <main>
