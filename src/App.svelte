@@ -37,8 +37,7 @@
     let tg = window.Telegram.WebApp;
     let username = (tg.initDataUnsafe.user) ? tg.initDataUnsafe.user.first_name : "guest";
 
-    tg.MainButton.text = "Buyurtma berish";
-    tg.MainButton.textColor = tg.ThemeParams.text_color;
+    tg.MainButton.text = "Buyurtma berish"
 
 </script>
 
