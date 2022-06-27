@@ -16,9 +16,6 @@
             })
     })
 
-    let tg = window.Telegram.WebApp;
-    let username = (tg.initDataUnsafe.user) ? tg.initDataUnsafe.user.first_name : "guest";
-
     const buy = (index) => {
         payload[index].count = 1;
         event.target.style.display = "none";
@@ -36,6 +33,13 @@
             document.getElementById(`${payload[index].name}-buy-btn`).style.display = "inline-block"
         }
     }
+
+    let tg = window.Telegram.WebApp;
+    let username = (tg.initDataUnsafe.user) ? tg.initDataUnsafe.user.first_name : "guest";
+
+    tg.MainButton.text = "Buyurtma berish";
+    tg.MainButton.textColor = tg.ThemeParams.text_color;
+
 </script>
 
 <main>
