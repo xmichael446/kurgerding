@@ -1,7 +1,3 @@
-<svelte:head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
-</svelte:head>
-
 <script>
     import axios from 'axios';
     import {onMount} from 'svelte'
@@ -23,6 +19,15 @@
         document.getElementById(`${payload[index].name}-counter`).style.display = "inline-block"
     }
 
+    const sendData = () => {
+        let d = payload.filter((obj) => {
+            console.log(obj)
+            return obj.count > 0;
+        })
+
+        tg.sendData(JSON.stringify(d))
+    }
+
     const changeCount = (index, x) => {
         payload[index].count += x;
 
@@ -36,8 +41,6 @@
 
     let tg = window.Telegram.WebApp;
     let username = (tg.initDataUnsafe.user) ? tg.initDataUnsafe.user.first_name : "guest";
-
-    tg.MainButton.text = "Buyurtma berish"
 
 </script>
 
@@ -73,7 +76,11 @@
             </div>
         {/each}
     </div>
-
+    <div class="main_btn">
+        <button class="order-button" on:click={sendData}>
+            Order
+        </button>
+    </div>
 </main>
 
 <style>
@@ -88,6 +95,7 @@
 
     button {
         border-radius: 5px;
+        border: 1px solid gray;
     }
 
     .tg-elem {
@@ -99,6 +107,17 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-gap: 0.5rem
+    }
+
+    .card {
+        border: 1px solid gray;
+        border-radius: 10px;
+    }
+
+
+    .card-img img {
+        border-radius: 10px 10px 0 0;
+        border-bottom: 1px solid gray;
     }
 
     .card-img img {
@@ -123,10 +142,12 @@
 
     .card-footer {
         text-align: center;
+        border-top: 1px solid gray;
+        padding: 5px;
     }
 
     .card-button {
-        /*display: none;*/
+        padding: 2px 20px;
     }
 
     .counter {
@@ -135,5 +156,16 @@
 
     .counter-button {
         padding: 0 10px;
+    }
+
+    .main_btn {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .order-button {
+        font-size: 2rem;
+        padding: 1rem 4rem;
+        border-radius: 1rem;
     }
 </style>
