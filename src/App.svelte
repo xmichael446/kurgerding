@@ -1,6 +1,13 @@
+<svelte:head>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</svelte:head>
+
 <script>
     import axios from 'axios';
     import {onMount} from 'svelte'
+
+    let tg = window.Telegram.WebApp;
+    let username = (tg.initDataUnsafe.user) ? tg.initDataUnsafe.user.first_name : "guest";
 
     let data = [];
     let payload = []
@@ -10,6 +17,9 @@
                 data = res.data;
                 payload = data.map(p => ({...p, count: 0}));
             })
+        tg.MainButton.text = "Hello";
+        tg.MainButton.enable()
+        tg.MainButton.show();
     })
 
     const buy = (index) => {
@@ -30,9 +40,6 @@
         }
     }
 
-    let tg = window.Telegram.WebApp;
-    let username = (tg.initDataUnsafe.user) ? tg.initDataUnsafe.user.first_name : "guest";
-
     const sendData = () => {
         let d = payload.filter((obj) => {
             console.log(obj)
@@ -42,7 +49,6 @@
         tg.sendData(JSON.stringify(d))
     }
 
-    tg.MainButton.text = "Hello";
 
     tg.onEvent('mainButtonClicked', () => {
         sendData()
