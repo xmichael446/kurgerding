@@ -17,12 +17,13 @@
                 data = res.data;
                 payload = data.map(p => ({...p, count: 0}));
             })
-        tg.MainButton.text = "Hello";
-        tg.MainButton.enable()
-        tg.MainButton.show();
     })
 
     const buy = (index) => {
+        tg.MainButton.text = "Hello";
+        tg.MainButton.enable()
+        tg.MainButton.show();
+
         payload[index].count = 1;
         event.target.style.display = "none";
 
