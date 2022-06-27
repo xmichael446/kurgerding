@@ -50,8 +50,7 @@
         tg.sendData(JSON.stringify(d))
     }
 
-
-    tg.onEvent('mainButtonClicked', () => {
+    tg.MainButton.onClick(() => {
         sendData()
     })
 </script>
