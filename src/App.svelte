@@ -11,19 +11,20 @@
 
     let data = [];
     let payload = []
-    onMount(async () => {
+    onMount(() => {
         axios.get("https://my-json-server.typicode.com/xmichael446/AlgorithmsInCpp/products")
             .then((res) => {
                 data = res.data;
                 payload = data.map(p => ({...p, count: 0}));
             })
+        if (!tg.MainButton.isVisible) {
+            tg.MainButton.text = "Buyurtma berish   ";
+            tg.MainButton.enable()
+            tg.MainButton.show();
+        }
     })
 
     const buy = (index) => {
-        tg.MainButton.text = "Hello";
-        tg.MainButton.enable()
-        tg.MainButton.show();
-
         payload[index].count = 1;
         event.target.style.display = "none";
 
@@ -86,11 +87,6 @@
                 </div>
             </div>
         {/each}
-    </div>
-    <div class="main_btn">
-        <button class="order-button" on:click={sendData}>
-            Order
-        </button>
     </div>
 </main>
 
