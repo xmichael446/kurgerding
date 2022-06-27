@@ -1,7 +1,3 @@
-<svelte:head>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-</svelte:head>
-
 <script>
     import axios from 'axios';
     import {onMount} from 'svelte'
@@ -17,14 +13,13 @@
                 data = res.data;
                 payload = data.map(p => ({...p, count: 0}));
             })
-        if (!tg.MainButton.isVisible) {
-            tg.MainButton.text = "Buyurtma berish   ";
-            tg.MainButton.enable()
-            tg.MainButton.show();
-        }
     })
 
     const buy = (index) => {
+        tg.MainButton.text = "Buyurtma berish";
+        tg.MainButton.enable()
+        tg.MainButton.show();
+
         payload[index].count = 1;
         event.target.style.display = "none";
 
@@ -53,6 +48,7 @@
 
     tg.MainButton.onClick(() => {
         sendData()
+        tg.close()
     })
 </script>
 
