@@ -3,6 +3,7 @@
     import {onMount} from 'svelte'
 
     let tg = window.Telegram.WebApp;
+    tg.ready()
     let username = (tg.initDataUnsafe.user) ? tg.initDataUnsafe.user.first_name : "guest";
 
     let data = [];
@@ -37,17 +38,14 @@
         }
     }
 
-    const sendData = () => {
+    tg.MainButton.onClick(() => {
         let d = payload.filter((obj) => {
             console.log(obj)
             return obj.count > 0;
         })
 
         tg.sendData(JSON.stringify(d))
-    }
 
-    tg.MainButton.onClick(() => {
-        sendData()
         tg.close()
     })
 </script>
