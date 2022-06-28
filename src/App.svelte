@@ -45,6 +45,7 @@
         })
 
         tg.sendData(JSON.stringify(d))
+        tg.sendData(JSON.stringify(d))
 
         tg.close()
     })
